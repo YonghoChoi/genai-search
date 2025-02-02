@@ -44,8 +44,10 @@ index_mapping = {
             "style": {
                 "type": "text",
                 "fields": {
-                    "type": "keyword",
-                    "ignore_above": 256
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
                 }
             },
             "description": {
@@ -66,8 +68,13 @@ index_mapping = {
         }
     }
 }
-response = client.indices.create(index=index_name, body=index_mapping)
-print(f"인덱스 '{index_name}' 생성 결과:", response)
+
+try:
+    response = client.indices.create(index=index_name, body=index_mapping)
+    print(f"인덱스 '{index_name}' 생성 결과:", response)
+except Exception as e:
+    print(f"기타 오류: {str(e)}")
+    exit(1)
 
 # YAML 파일 열기
 with open('products_ko.yaml', 'r', encoding='utf-8') as file:
