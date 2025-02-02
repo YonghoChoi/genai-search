@@ -33,16 +33,20 @@ index_mapping = {
                 "type": "integer"
             },
             "name": {
-                "type": "keyword"
+                "type": "text"
             },
             "category": {
                 "type": "keyword"
             },
             "style": {
-                "type": "keyword"
+                "type": "text",
+                "fields": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                }
             },
             "description": {
-                "type": "keyword"
+                "type": "text"
             },
             "price": {
                 "type": "integer"
@@ -63,7 +67,7 @@ response = client.indices.create(index=index_name, body=index_mapping)
 print(f"인덱스 '{index_name}' 생성 결과:", response)
 
 # YAML 파일 열기
-with open('products.yaml', 'r', encoding='utf-8') as file:
+with open('products_ko.yaml', 'r', encoding='utf-8') as file:
     # YAML 파일 내용을 Python 객체로 로드
     arr = yaml.safe_load(file)
 
