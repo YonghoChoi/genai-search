@@ -17,8 +17,11 @@ client = OpenSearch(
     verify_certs=True
 )
 
-response = client.indices.delete(index=index_name)
-print(f"인덱스 '{index_name}' 삭제 결과:", response)
+try:
+    response = client.indices.delete(index=index_name)
+    print(f"인덱스 '{index_name}' 삭제 결과:", response)
+except Exception as e:
+    print(e)
 
 index_mapping = {
     "settings": {
